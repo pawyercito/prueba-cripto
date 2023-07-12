@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Box, Button, ChakraProvider, extendTheme, Flex, Heading, Text, useColorMode } from '@chakra-ui/react';
 import ColorModeSwitcher from '../components/ColorModeSwitcher';
 import { VaultDetails, AboutStrategy } from '../components/Tabs';
+import NavBar from '../components/NavBar';
 
 const theme = extendTheme({
   config: {
@@ -30,20 +31,13 @@ const Home = () => {
 
   return (
     <ChakraProvider theme={theme}>
+      <NavBar /> {/* Agrega el componente NavBar */}
       <Box p={4}>
         <Flex justify="space-between" align="center" mb={4}>
           <Heading as="h1" size="lg">
             My App
           </Heading>
           <ColorModeSwitcher />
-        </Flex>
-        <Flex direction="column" mb={4}>
-          <Button onClick={() => handleTabChange('VaultDetails')} variant={currentTab === 'VaultDetails' ? 'solid' : 'outline'}>
-            Deposit
-          </Button>
-          <Button onClick={() => handleTabChange('AboutStrategy')} variant={currentTab === 'AboutStrategy' ? 'solid' : 'outline'}>
-            About Strategy
-          </Button>
         </Flex>
         <Flex justifyContent="center" alignItems="flex-start" flexWrap="wrap">
           <Box
@@ -62,7 +56,7 @@ const Home = () => {
               auto-compound
             </Text>
             <Text fontSize="lg" fontWeight="bold" mb={2}>
-              DEPOSIT
+              Deposit
             </Text>
             <Text fontSize="md" mb={2}>
               Balance: {balance} ETH
@@ -84,8 +78,6 @@ const Home = () => {
                   width="15%"
                   size="sm"
                   height="20"
-                  
-                  
                 >
                   MAX
                 </Button>
@@ -98,7 +90,6 @@ const Home = () => {
               colorScheme="white"
               variant="outline"
               height="20"
-              
             >
               Deposit
             </Button>
@@ -132,6 +123,14 @@ const Home = () => {
           >
             {currentTab === 'AboutStrategy' && <AboutStrategy />}
           </Box>
+        </Flex>
+        <Flex direction="column" mt={4}>
+          <Button onClick={() => handleTabChange('VaultDetails')} variant={currentTab === 'VaultDetails' ? 'solid' : 'outline'}>
+            Vault Details {/* Cambia "Deposit" por "Vault Details" */}
+          </Button>
+          <Button onClick={() => handleTabChange('AboutStrategy')} variant={currentTab === 'AboutStrategy' ? 'solid' : 'outline'}>
+            About Strategy
+          </Button>
         </Flex>
       </Box>
     </ChakraProvider>
